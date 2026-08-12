@@ -94,9 +94,9 @@ An adapter translates calling conventions. It does not contain memory logic.
 
 ## 9. Open questions
 
-- **`.env` key mismatch (blocker for live use).** `.env` defines `mem0_API_KEY` and
-  `mem0_ENDPOINT`; the code reads `MEM0_API_KEY` and `MEM0_HOST`. Both currently resolve to
-  `None`, so the client cannot connect. Needs its own task to reconcile.
+- **`.env` key mismatch (blocker for live use). Resolved (T1).** `.env` now defines
+  `MEM0_API_KEY` and `MEM0_HOST`, matching what `mem0_core.py` reads. Both resolve to
+  non-`None` values at client construction.
 - **No automated validation.** No test runner, linter, or type checker is configured.
   Validation is manual until that changes.
 - **Cross-project reuse mechanism undecided.** Path import, local package install, or git
