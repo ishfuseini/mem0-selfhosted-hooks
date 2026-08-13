@@ -97,18 +97,20 @@ Run any script in the project:
 
 ## Validation
 
-No test runner, linter, or type checker is configured yet. Until one
-is added:
+- Test runner: `pytest` (with `pytest-asyncio`, `asyncio_mode = "auto"`)
+- Linter: `ruff`
 
-- Manually exercise changed functions (e.g. via a short `uv run
-  python -c "..."` check or a scratch script) before reporting a task
-  complete.
-- Report explicitly that automated validation is unavailable rather
-  than skipping validation silently.
+Run before reporting a task complete:
 
-If a task introduces the first tests, linter, or type-checker
-configuration, record the chosen tools and their run commands here as
-part of that task.
+    uv run pytest
+    uv run ruff check
+
+Both must pass. `tests/conftest.py` patches `mem0.AsyncMemoryClient`
+before `mem0_core` is first imported, so importing `mem0_core` and
+running the test suite never makes a network call — the module
+otherwise validates its API key against the live host at import time.
+
+No type checker is configured yet.
 
 ---
 
